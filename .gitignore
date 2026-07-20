@@ -31,3 +31,5 @@ node_modules/
 
 # Logs
 *.log
+
+models/model.pkl
