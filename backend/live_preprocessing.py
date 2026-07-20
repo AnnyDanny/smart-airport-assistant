@@ -1,0 +1,70 @@
+import pandas as pd
+import joblib
+from pathlib import Path
+
+def load_live_flights():
+    base_dir = Path(__file__).resolve().parent.parent
+    csv_path = base_dir / "data" / "live" / "flights.csv"
+    df = pd.read_csv(csv_path)
+    return df
+
+def create_time_features(df):
+    required_columns = [
+        "ScheduledDeparture",
+        "ScheduledArrival",
+    ]
+    for column in required_columns:
+        if column not in df.columns:
+            raise ValueError(f"Missing required column: {column}")
+    df["ScheduledDeparture"] = pd.to_datetime(
+        df["ScheduledDeparture"],
+        utc=True
+    )
+    df["ScheduledArrival"] = pd.to_datetime(
+        df["ScheduledArrival"],
+        utc=True
+    )
+    df["DepartureHour"] = df["ScheduledDeparture"].dt.hour
+    df["Month"] = df["ScheduledDeparture"].dt.month
+    df["DayOfWeek"] = df["ScheduledDeparture"].dt.dayofweek
+    return df
+
+def fill_missing_values(df):
+    df["Terminal"] = (
+        df["Terminal"]
+        .fillna("Unknown")
+        .astype(str)
+        .str.replace(".0", "", regex=False)
+    )
+    df["Gate"] = df["Gate"].fillna("Unknown")
+    df["DepartureDelay"] = df["DepartureDelay"].fillna(0)
+    df["ArrivalDelay"] = df["ArrivalDelay"].fillna(0)
+    return df
+
+def select_columns(df):
+    columns = [
+        "FlightNumber",
+        "Airline",
+        "Origin",
+        "OriginAirport",
+        "Destination",
+        "DestinationAirport",
+        "ScheduledDeparture",
+        "ScheduledArrival",
+        "DepartureHour",
+        "Month",
+        "DayOfWeek",
+        "Terminal",
+        "Gate",
+        "DepartureDelay",
+        "ArrivalDelay",
+        "FlightStatus",
+    ]
+    return df[columns]
+
+def preprocess_live_flights():
+    df = load_live_flights()
+    df = create_time_features(df)
+    df = fill_missing_values(df)
+    df = select_columns(df)
+    return df

@@ -1,6 +1,33 @@
-venv/
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Mac
 .DS_Store
-.idea/
+
+
+# Node
+node_modules/
+
+
+# IDE
 .vscode/
+.idea/
+
+
+# Environment variables
+.env
+
+
+# Logs
+*.log
