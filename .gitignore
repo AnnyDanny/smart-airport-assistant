@@ -32,4 +32,9 @@ node_modules/
 # Logs
 *.log
 
+# Large ML models
 models/model.pkl
+
+# Large datasets
+data/historical/
+data/processed/
