@@ -1,3 +1,4 @@
+from huggingface_hub import hf_hub_download
 import joblib
 import pandas as pd
 from pathlib import Path
@@ -10,14 +11,55 @@ def safe_encode(value, encoder):
     return 0
 
 def load_model():
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    models_dir = BASE_DIR / "models"
-    model = joblib.load(models_dir / "model.pkl")
 
-    airline_encoder = joblib.load(models_dir / "airline_encoder.pkl")
-    origin_encoder = joblib.load(models_dir / "origin_encoder.pkl")
-    destination_encoder = joblib.load(models_dir / "destination_encoder.pkl")
-    aircraft_encoder = joblib.load(models_dir / "aircraft_encoder.pkl")
+    repo_id = "HannaDanylova/smart-airport-model"
+
+
+    model_path = hf_hub_download(
+        repo_id=repo_id,
+        filename="model.pkl"
+    )
+
+    airline_encoder_path = hf_hub_download(
+        repo_id=repo_id,
+        filename="airline_encoder.pkl"
+    )
+
+    origin_encoder_path = hf_hub_download(
+        repo_id=repo_id,
+        filename="origin_encoder.pkl"
+    )
+
+    destination_encoder_path = hf_hub_download(
+        repo_id=repo_id,
+        filename="destination_encoder.pkl"
+    )
+
+    aircraft_encoder_path = hf_hub_download(
+        repo_id=repo_id,
+        filename="aircraft_encoder.pkl"
+    )
+
+
+    model = joblib.load(model_path)
+
+    airline_encoder = joblib.load(
+        airline_encoder_path
+    )
+
+    origin_encoder = joblib.load(
+        origin_encoder_path
+    )
+
+    destination_encoder = joblib.load(
+        destination_encoder_path
+    )
+
+    aircraft_encoder = joblib.load(
+        aircraft_encoder_path
+    )
+
+
     return (
         model,
         airline_encoder,
