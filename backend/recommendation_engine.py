@@ -68,6 +68,39 @@ def load_model():
         aircraft_encoder,
     )
 
+'''def load_model():
+
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    models_dir = BASE_DIR / "models"
+
+    model = joblib.load(
+        models_dir / "model_n_estimators10.pkl"
+    )
+
+    airline_encoder = joblib.load(
+        models_dir / "airline_encoder.pkl"
+    )
+
+    origin_encoder = joblib.load(
+        models_dir / "origin_encoder.pkl"
+    )
+
+    destination_encoder = joblib.load(
+        models_dir / "destination_encoder.pkl"
+    )
+
+    aircraft_encoder = joblib.load(
+        models_dir / "aircraft_encoder.pkl"
+    )
+
+    return (
+        model,
+        airline_encoder,
+        origin_encoder,
+        destination_encoder,
+        aircraft_encoder,
+    )'''
+
 def load_live_data():
     df = preprocess_live_flights()
     return df
