@@ -1,8 +1,11 @@
+const API_URL = "https://smart-airport-api.onrender.com";
+//const API_URL = "http://127.0.0.1:8000";
+
 
 async function loadFlights(){
     const response =
         await fetch(
-            "http://127.0.0.1:8000/flights"
+            `${API_URL}/flights`
         );
     const flights =
         await response.json();
@@ -144,30 +147,71 @@ function getWeatherImpactColor(impact){
 
 async function searchFlight() {
     const flightNumber =
-        document.getElementById("flightInput").value;
+    document.getElementById("flightInput").value.trim();
+
+const result =
+    document.getElementById("result");
+
+if (flightNumber === "") {
+
+    result.innerHTML = `
+    <div class="card">
+        <h2>⚠️ No flight number entered</h2>
+        <p>Please enter a flight number.</p>
+    </div>
+    `;
+
+    return;
+}
+
+try {
+
     const response =
         await fetch(
-            `http://127.0.0.1:8000/predict/${flightNumber}`
+            `${API_URL}/predict/${flightNumber}`
         );
+
+    if (!response.ok) {
+
+        result.innerHTML = `
+        <div class="card">
+            <h2>❌ Flight not found</h2>
+            <p>
+                The flight number
+                <strong>${flightNumber}</strong>
+                was not found.
+            </p>
+            <p>
+                <strong>Please choose a valid flight number.</strong>
+            </p>
+        </div>
+        `;
+
+        return;
+    }
+
     const data =
         await response.json();
-        const status = getStatusBadge(data.FlightStatus);
-        const delayExplanation = getDelayExplanation(data);
-        const probability = data.DelayProbability;
-        let riskText;
-        let riskColor;
-        if (probability < 0.3) {
-            riskText = "Low";
-            riskColor = "green";
-        } else if (probability < 0.7) {
-            riskText = "Medium";
-            riskColor = "orange";
-        } else {
-            riskText = "High";
-            riskColor = "red";
-        }
-    const result =
-        document.getElementById("result");
+
+    const status = getStatusBadge(data.FlightStatus);
+    const delayExplanation = getDelayExplanation(data);
+    const probability = data.DelayProbability;
+
+    let riskText;
+    let riskColor;
+
+    if (probability < 0.3) {
+        riskText = "Low";
+        riskColor = "green";
+    }
+    else if (probability < 0.7) {
+        riskText = "Medium";
+        riskColor = "orange";
+    }
+    else {
+        riskText = "High";
+        riskColor = "red";
+    }
 
         result.innerHTML = `
 <div class="card">
@@ -300,6 +344,23 @@ async function searchFlight() {
     </p>
 </div>
 `;
+    }
+    catch (error) {
+
+        console.error(error);
+
+        result.innerHTML = `
+        <div class="card">
+            <h2>⚠️ Connection error</h2>
+            <p>
+                Unable to connect to the Smart Airport Assistant server.
+            </p>
+            <p>
+              Please try again later.
+           </p>
+        </div>
+     `;
+    }
 }
 
 window.onload = function(){
