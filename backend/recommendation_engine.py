@@ -13,8 +13,6 @@ def safe_encode(value, encoder):
 def load_model():
 
     repo_id = "HannaDanylova/smart-airport-model"
-
-
     model_path = hf_hub_download(
         repo_id=repo_id,
         filename="model.pkl"
@@ -146,9 +144,9 @@ def prepare_features(
     return pd.DataFrame([features])
 
 def predict_delay(model, features):
-    probability = model.predict_proba(
-        features
-    )[0][1]
+    probabilities = model.predict_proba(features)
+    print(probabilities)
+    probability = probabilities[0][1]
     return probability
 
 def calculate_arrival_time(flight):

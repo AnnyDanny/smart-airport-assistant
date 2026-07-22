@@ -192,6 +192,7 @@ try {
 
     const data =
         await response.json();
+    console.log(data);
 
     const status = getStatusBadge(data.FlightStatus);
     const delayExplanation = getDelayExplanation(data);

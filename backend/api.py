@@ -20,6 +20,8 @@ from backend.weather_service import get_weather
     aircraft_encoder,
 ) = load_model()
 
+print("Loaded api from:", __file__)
+
 app = FastAPI(
     title="Smart Airport Assistant API",
     description="Machine Learning API for flight delay prediction.",
@@ -85,6 +87,9 @@ def get_prediction(flight_number: str):
         features,
     )
 
+    print("Probability:", probability)
+    print(type(probability))
+
     recommendation = calculate_arrival_time(
         flight
     )
@@ -94,6 +99,7 @@ def get_prediction(flight_number: str):
         probability,
         recommendation,
     )
+    print(result)
     result["Congestion"] = congestion
     result["Weather"] = weather
     return result
