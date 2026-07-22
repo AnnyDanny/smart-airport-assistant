@@ -41,6 +41,10 @@ def load_model():
 
     model = joblib.load(model_path)
 
+    print("Model path:", model_path)
+    print("Model size:", Path(model_path).stat().st_size)
+    print("Model:", model)
+
     airline_encoder = joblib.load(
         airline_encoder_path
     )
@@ -56,8 +60,6 @@ def load_model():
     aircraft_encoder = joblib.load(
         aircraft_encoder_path
     )
-
-
     return (
         model,
         airline_encoder,
