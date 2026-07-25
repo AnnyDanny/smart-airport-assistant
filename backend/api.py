@@ -82,6 +82,8 @@ def get_prediction(flight_number: str):
         destination_encoder,
         aircraft_encoder,
     )
+    print("FEATURES:")
+    print(features)
     probability = predict_delay(
         model,
         features,
@@ -99,6 +101,7 @@ def get_prediction(flight_number: str):
         probability,
         recommendation,
     )
+    print("API RESULT:")
     print(result)
     result["Congestion"] = congestion
     result["Weather"] = weather

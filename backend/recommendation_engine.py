@@ -147,8 +147,9 @@ def prepare_features(
 
 def predict_delay(model, features):
     probabilities = model.predict_proba(features)
-    print(probabilities)
+    print("predict_proba =", probabilities)
     probability = probabilities[0][1]
+    print("probability =", probability)
     return probability
 
 def calculate_arrival_time(flight):

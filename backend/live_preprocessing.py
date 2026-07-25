@@ -1,6 +1,7 @@
 import pandas as pd
 import joblib
 from pathlib import Path
+from backend.collect_data import refresh_live_data
 
 def load_live_flights():
     base_dir = Path(__file__).resolve().parent.parent
@@ -63,6 +64,7 @@ def select_columns(df):
     return df[columns]
 
 def preprocess_live_flights():
+    refresh_live_data()
     df = load_live_flights()
     df = create_time_features(df)
     df = fill_missing_values(df)

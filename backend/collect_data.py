@@ -1,7 +1,7 @@
 
 from pathlib import Path
 import requests
-from config import API_KEY
+from backend.config import API_KEY
 import json
 import pandas as pd
 
@@ -60,6 +60,13 @@ def save_csv(flights):
     live_dir = BASE_DIR / "data" / "live"
     live_dir.mkdir(parents=True, exist_ok=True)
     df.to_csv(live_dir / "flights.csv", index=False)
+
+def refresh_live_data():
+    data = download_flights()
+    save_raw_json(data)
+
+    flights = extract_flights(data)
+    save_csv(flights)
 
 def main():
     data = download_flights()
