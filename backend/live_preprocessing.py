@@ -1,13 +1,6 @@
 import pandas as pd
-import joblib
-from pathlib import Path
 from backend.collect_data import refresh_live_data
 
-def load_live_flights():
-    base_dir = Path(__file__).resolve().parent.parent
-    csv_path = base_dir / "data" / "live" / "flights.csv"
-    df = pd.read_csv(csv_path)
-    return df
 
 def create_time_features(df):
     required_columns = [

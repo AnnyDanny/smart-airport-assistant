@@ -1,0 +1,101 @@
+FlightNumber,Airline,Origin,OriginAirport,Destination,DestinationAirport,ScheduledDeparture,ScheduledArrival,Terminal,Gate,DepartureDelay,ArrivalDelay,FlightStatus
+FH410,Freebird Airlines,CPH,Kastrup,AYT,Antalya,2026-07-25T18:50:00+00:00,2026-07-25T23:18:00+00:00,,,,,scheduled
+AM7815,Aeromexico,CPH,Kastrup,CDG,Charles De Gaulle,2026-07-25T18:45:00+00:00,2026-07-25T20:45:00+00:00,3,B9,,,scheduled
+AF4582,Air France,CPH,Kastrup,CDG,Charles De Gaulle,2026-07-25T18:45:00+00:00,2026-07-25T20:45:00+00:00,3,B9,,,scheduled
+SQ2023,Singapore Airlines,CPH,Kastrup,FRA,Frankfurt International Airport,2026-07-25T18:40:00+00:00,2026-07-25T20:10:00+00:00,2,,,10.0,scheduled
+EY3767,Etihad Airways,CPH,Kastrup,FRA,Frankfurt International Airport,2026-07-25T18:40:00+00:00,2026-07-25T20:10:00+00:00,2,,,10.0,scheduled
+ET1562,Ethiopian Airlines,CPH,Kastrup,FRA,Frankfurt International Airport,2026-07-25T18:40:00+00:00,2026-07-25T20:10:00+00:00,2,,,10.0,scheduled
+AI8575,Air India,CPH,Kastrup,FRA,Frankfurt International Airport,2026-07-25T18:40:00+00:00,2026-07-25T20:10:00+00:00,2,,,10.0,scheduled
+FR6968,Ryanair,CPH,Kastrup,MAN,Manchester Airport,2026-07-25T21:50:00+00:00,2026-07-25T22:50:00+00:00,2,,,,scheduled
+VY1873,Vueling,CPH,Kastrup,BCN,El Prat De Llobregat,2026-07-25T21:45:00+00:00,2026-07-26T00:50:00+00:00,2,,,,scheduled
+SK1472,SAS,CPH,Kastrup,OSL,Gardermoen,2026-07-25T21:25:00+00:00,2026-07-25T22:35:00+00:00,3,,,,scheduled
+SK1410,SAS,CPH,Kastrup,ARN,Arlanda,2026-07-25T21:25:00+00:00,2026-07-25T22:35:00+00:00,3,,,,scheduled
+DY3646,Norwegian,CPH,Kastrup,NCE,Cote D'azur International Airport,2026-07-25T18:40:00+00:00,2026-07-25T21:00:00+00:00,2,146-,,10.0,scheduled
+WX2657,CityJet,CPH,Kastrup,MUC,Franz Josef Strauss,2026-07-25T18:10:00+00:00,2026-07-25T19:45:00+00:00,3,1-38,,13.0,scheduled
+UU8851,Air Austral,CPH,Kastrup,CDG,Charles De Gaulle,2026-07-25T18:00:00+00:00,2026-07-25T20:00:00+00:00,2,102-,,11.0,scheduled
+SK9824,SAS,CPH,Kastrup,CDG,Charles De Gaulle,2026-07-25T18:00:00+00:00,2026-07-25T20:00:00+00:00,2,102-,,11.0,scheduled
+MK9617,Air Mauritius,CPH,Kastrup,CDG,Charles De Gaulle,2026-07-25T18:00:00+00:00,2026-07-25T20:00:00+00:00,2,102-,,11.0,scheduled
+KQ3193,Kenya Airways,CPH,Kastrup,CDG,Charles De Gaulle,2026-07-25T18:00:00+00:00,2026-07-25T20:00:00+00:00,2,102-,,11.0,scheduled
+G35255,GOL,CPH,Kastrup,CDG,Charles De Gaulle,2026-07-25T18:00:00+00:00,2026-07-25T20:00:00+00:00,2,102-,,11.0,scheduled
+AM5782,Aeromexico,CPH,Kastrup,CDG,Charles De Gaulle,2026-07-25T18:00:00+00:00,2026-07-25T20:00:00+00:00,2,102-,,11.0,scheduled
+SK8909,SAS,CPH,Kastrup,LIS,Lisbon Portela,2026-07-25T17:40:00+00:00,2026-07-25T20:40:00+00:00,2,,,10.0,scheduled
+S48249,Azores Airlines,CPH,Kastrup,LIS,Lisbon Portela,2026-07-25T17:40:00+00:00,2026-07-25T20:40:00+00:00,2,,,10.0,scheduled
+FI6409,Icelandair,CPH,Kastrup,LIS,Lisbon Portela,2026-07-25T17:40:00+00:00,2026-07-25T20:40:00+00:00,2,,,10.0,scheduled
+AY6759,Finnair,CPH,Kastrup,LIS,Lisbon Portela,2026-07-25T17:40:00+00:00,2026-07-25T20:40:00+00:00,2,,,10.0,scheduled
+LY9768,El Al,CPH,Kastrup,FCO,Leonardo Da Vinci (Fiumicino),2026-07-25T17:20:00+00:00,2026-07-25T19:55:00+00:00,3,A18,,11.0,scheduled
+AM7810,Aeromexico,CPH,Kastrup,FCO,Leonardo Da Vinci (Fiumicino),2026-07-25T17:20:00+00:00,2026-07-25T19:55:00+00:00,3,A18,,11.0,scheduled
+TP8357,TAP Air Portugal,CPH,Kastrup,HEL,Helsinki-vantaa,2026-07-25T17:00:00+00:00,2026-07-25T19:35:00+00:00,2,122-,,15.0,scheduled
+QR6786,Qatar Airways,CPH,Kastrup,HEL,Helsinki-vantaa,2026-07-25T17:00:00+00:00,2026-07-25T19:35:00+00:00,2,122-,,15.0,scheduled
+TF1679,BRA,CPH,Kastrup,BER,Berlin Brandenburg Airport,2026-07-25T21:00:00+00:00,2026-07-25T22:00:00+00:00,3,1-38,,,scheduled
+OU5557,Croatia Airlines,CPH,Kastrup,VIE,Vienna International,2026-07-25T20:00:00+00:00,2026-07-25T21:40:00+00:00,2,102-,,,scheduled
+TP6414,TAP Air Portugal,CPH,Kastrup,RIX,Riga International,2026-07-25T20:30:00+00:00,2026-07-25T22:55:00+00:00,2,102-,,,scheduled
+LY8032,El Al,CPH,Kastrup,RIX,Riga International,2026-07-25T20:30:00+00:00,2026-07-25T22:55:00+00:00,2,102-,,,scheduled
+EY3947,Etihad Airways,CPH,Kastrup,GOT,Landvetter,2026-07-25T14:05:00+00:00,2026-07-25T14:55:00+00:00,3,B8,,,landed
+DY3782,Norwegian,CPH,Kastrup,BOJ,Bourgas,2026-07-25T18:45:00+00:00,2026-07-25T22:25:00+00:00,2,146-,,,scheduled
+JL6884,Japan Airlines,CPH,Kastrup,HEL,Helsinki-vantaa,2026-07-25T17:00:00+00:00,2026-07-25T19:35:00+00:00,2,122-,,15.0,scheduled
+FI7360,Icelandair,CPH,Kastrup,HEL,Helsinki-vantaa,2026-07-25T17:00:00+00:00,2026-07-25T19:35:00+00:00,2,122-,,15.0,scheduled
+DY3666,Norwegian,CPH,Kastrup,PMI,Son Sant Joan Airport,2026-07-25T17:10:00+00:00,2026-07-25T20:10:00+00:00,2,146-,,,scheduled
+SK2651,SAS,CPH,Kastrup,GOA,Cristoforo Colombo,2026-07-25T17:05:00+00:00,2026-07-25T19:20:00+00:00,3,1-38,,,scheduled
+DY5715,Norwegian,CPH,Kastrup,LPA,Gran Canaria,2026-07-25T17:05:00+00:00,2026-07-25T21:30:00+00:00,2,146-,,,scheduled
+RO9290,Tarom,CPH,Kastrup,AMS,Schiphol,2026-07-25T16:40:00+00:00,2026-07-25T18:10:00+00:00,3,E5,,11.0,scheduled
+KL2855,KLM,CPH,Kastrup,AMS,Schiphol,2026-07-25T16:40:00+00:00,2026-07-25T18:10:00+00:00,3,E5,,11.0,scheduled
+AM7824,Aeromexico,CPH,Kastrup,AMS,Schiphol,2026-07-25T16:40:00+00:00,2026-07-25T18:10:00+00:00,3,E5,,11.0,scheduled
+SK6608,SAS,CPH,Kastrup,AMS,Schiphol,2026-07-25T16:30:00+00:00,2026-07-25T17:55:00+00:00,2,,,36.0,active
+MH5640,Malaysia Airlines,CPH,Kastrup,AMS,Schiphol,2026-07-25T16:30:00+00:00,2026-07-25T17:55:00+00:00,2,,,36.0,active
+MF9378,Xiamen Air,CPH,Kastrup,AMS,Schiphol,2026-07-25T16:30:00+00:00,2026-07-25T17:55:00+00:00,2,,,36.0,active
+KQ1132,Kenya Airways,CPH,Kastrup,AMS,Schiphol,2026-07-25T16:30:00+00:00,2026-07-25T17:55:00+00:00,2,,,36.0,active
+KE6410,Korean Air,CPH,Kastrup,AMS,Schiphol,2026-07-25T16:30:00+00:00,2026-07-25T17:55:00+00:00,2,,,36.0,active
+GA9473,Garuda Indonesia,CPH,Kastrup,AMS,Schiphol,2026-07-25T16:30:00+00:00,2026-07-25T17:55:00+00:00,2,,,36.0,active
+AM6381,Aeromexico,CPH,Kastrup,AMS,Schiphol,2026-07-25T16:30:00+00:00,2026-07-25T17:55:00+00:00,2,,,36.0,active
+6E8035,IndiGo,CPH,Kastrup,AMS,Schiphol,2026-07-25T16:30:00+00:00,2026-07-25T17:55:00+00:00,2,,,36.0,active
+MH9254,Malaysia Airlines,CPH,Kastrup,DOH,Doha International,2026-07-25T16:00:00+00:00,2026-07-25T23:00:00+00:00,2,C33,,,active
+PR3441,Philippine Airlines,CPH,Kastrup,DOH,Doha International,2026-07-25T16:00:00+00:00,2026-07-25T23:00:00+00:00,2,C33,,,active
+WY6117,Oman Air,CPH,Kastrup,DOH,Doha International,2026-07-25T16:00:00+00:00,2026-07-25T23:00:00+00:00,2,C33,,,active
+IB8402,Iberia,CPH,Kastrup,DOH,Doha International,2026-07-25T16:00:00+00:00,2026-07-25T23:00:00+00:00,2,C33,,,active
+WB1152,RwandAir,CPH,Kastrup,DOH,Doha International,2026-07-25T16:00:00+00:00,2026-07-25T23:00:00+00:00,2,C33,,,active
+VA6241,Virgin Australia,CPH,Kastrup,DOH,Doha International,2026-07-25T16:00:00+00:00,2026-07-25T23:00:00+00:00,2,C33,,,active
+AY6700,Finnair,CPH,Kastrup,DOH,Doha International,2026-07-25T16:00:00+00:00,2026-07-25T23:00:00+00:00,2,C33,,,active
+IB8534,Iberia,CPH,Kastrup,PHL,Philadelphia International,2026-07-25T15:20:00+00:00,2026-07-25T17:55:00+00:00,3,E129,,13.0,active
+BA1645,British Airways,CPH,Kastrup,PHL,Philadelphia International,2026-07-25T15:20:00+00:00,2026-07-25T17:55:00+00:00,3,E129,,13.0,active
+AY3869,Finnair,CPH,Kastrup,PHL,Philadelphia International,2026-07-25T15:20:00+00:00,2026-07-25T17:55:00+00:00,3,E129,,13.0,active
+QF8152,Qantas,CPH,Kastrup,DXB,Dubai,2026-07-25T15:15:00+00:00,2026-07-26T00:20:00+00:00,2,124-,,13.0,active
+FI6016,Icelandair,CPH,Kastrup,DXB,Dubai,2026-07-25T15:15:00+00:00,2026-07-26T00:20:00+00:00,2,124-,,13.0,active
+WY5754,Oman Air,CPH,Kastrup,IST,Istanbul Airport,2026-07-25T15:00:00+00:00,2026-07-25T19:15:00+00:00,2,C30,,22.0,active
+TG9162,Thai Airways,CPH,Kastrup,IST,Istanbul Airport,2026-07-25T15:00:00+00:00,2026-07-25T19:15:00+00:00,2,C30,,22.0,active
+PK5782,Pakistan International Airlines,CPH,Kastrup,IST,Istanbul Airport,2026-07-25T15:00:00+00:00,2026-07-25T19:15:00+00:00,2,C30,,22.0,active
+GF6084,Gulf Air,CPH,Kastrup,IST,Istanbul Airport,2026-07-25T15:00:00+00:00,2026-07-25T19:15:00+00:00,2,C30,,22.0,active
+FI7009,Icelandair,CPH,Kastrup,IST,Istanbul Airport,2026-07-25T15:00:00+00:00,2026-07-25T19:15:00+00:00,2,C30,,22.0,active
+6E4158,IndiGo,CPH,Kastrup,IST,Istanbul Airport,2026-07-25T15:00:00+00:00,2026-07-25T19:15:00+00:00,2,C30,,22.0,active
+3U7322,Sichuan Airlines,CPH,Kastrup,IST,Istanbul Airport,2026-07-25T15:00:00+00:00,2026-07-25T19:15:00+00:00,2,C30,,22.0,active
+VS5907,Virgin Atlantic,CPH,Kastrup,LHR,Heathrow,2026-07-25T15:00:00+00:00,2026-07-25T16:00:00+00:00,3,E104,,3.0,active
+SQ2627,Singapore Airlines,CPH,Kastrup,LHR,Heathrow,2026-07-25T15:00:00+00:00,2026-07-25T16:00:00+00:00,3,E104,,3.0,active
+DL7625,Delta Air Lines,CPH,Kastrup,LHR,Heathrow,2026-07-25T15:00:00+00:00,2026-07-25T16:00:00+00:00,3,E104,,3.0,active
+AM7831,Aeromexico,CPH,Kastrup,LHR,Heathrow,2026-07-25T15:00:00+00:00,2026-07-25T16:00:00+00:00,3,E104,,3.0,active
+TP5581,TAP Air Portugal,CPH,Kastrup,ARN,Arlanda,2026-07-25T19:05:00+00:00,2026-07-25T20:20:00+00:00,3,1-38,,,scheduled
+SK,SAS,CPH,Kastrup,ARN,Arlanda,2026-07-25T15:00:00+00:00,2026-07-25T16:08:00+00:00,,,,15.0,active
+FR6880,Ryanair,CPH,Kastrup,MAN,Manchester Airport,2026-07-25T13:50:00+00:00,2026-07-25T14:50:00+00:00,3,F104,,13.0,active
+TF757,BRA,CPH,Kastrup,GDN,Lech Walesa,2026-07-25T19:05:00+00:00,2026-07-25T20:25:00+00:00,3,1-38,,,scheduled
+FI6398,Icelandair,CPH,Kastrup,FAE,Vagar,2026-07-25T18:35:00+00:00,2026-07-25T19:50:00+00:00,2,,,,scheduled
+AF3883,Air France,CPH,Kastrup,FAE,Vagar,2026-07-25T18:35:00+00:00,2026-07-25T19:50:00+00:00,2,,,,scheduled
+KL9541,KLM,CPH,Kastrup,FAE,Vagar,2026-07-25T18:35:00+00:00,2026-07-25T19:50:00+00:00,2,,,,scheduled
+W43114,Wizz Air Malta,CPH,Kastrup,OTP,Henri Coanda International,2026-07-25T21:00:00+00:00,2026-07-26T00:35:00+00:00,2,,,,scheduled
+SK1679,SAS,CPH,Kastrup,BER,Berlin Brandenburg Airport,2026-07-25T21:00:00+00:00,2026-07-25T22:00:00+00:00,3,,,10.0,scheduled
+MU708,China Eastern Airlines,CPH,Kastrup,PVG,Shanghai Pudong International,2026-07-25T21:00:00+00:00,2026-07-26T13:15:00+00:00,2,,,,scheduled
+PC1076,Pegasus,CPH,Kastrup,SAW,Sabiha Gokcen,2026-07-25T20:50:00+00:00,2026-07-26T01:00:00+00:00,2,,,,scheduled
+FR2762,Ryanair,CPH,Kastrup,KRK,John Paul II Balice International,2026-07-25T20:35:00+00:00,2026-07-25T22:10:00+00:00,2,,,,scheduled
+D85373,Norwegian Air Sweden,CPH,Kastrup,ALC,Alicante El Altet,2026-07-25T20:35:00+00:00,2026-07-25T23:55:00+00:00,2,,,,scheduled
+BT140,airBaltic,CPH,Kastrup,RIX,Riga International,2026-07-25T20:30:00+00:00,2026-07-25T22:55:00+00:00,2,102-,,10.0,scheduled
+FR648,Ryanair,CPH,Kastrup,AGP,Pablo Ruiz Picasso,2026-07-25T20:25:00+00:00,2026-07-26T00:15:00+00:00,2,,,,scheduled
+GQ6401,SKY express,CPH,Kastrup,RHO,Diagoras,2026-07-25T20:15:00+00:00,2026-07-26T00:50:00+00:00,,,,10.0,scheduled
+FR2619,Ryanair,CPH,Kastrup,STN,Stansted,2026-07-25T20:15:00+00:00,2026-07-25T21:10:00+00:00,2,,,,scheduled
+D85075,Norwegian Air Sweden,CPH,Kastrup,AGP,Pablo Ruiz Picasso,2026-07-25T20:15:00+00:00,2026-07-25T23:55:00+00:00,2,,,,scheduled
+SM8760,Air Cairo,CPH,Kastrup,CAI,Cairo International Airport,2026-07-25T15:45:00+00:00,2026-07-25T21:15:00+00:00,2,C32,,,scheduled
+ET1462,Ethiopian Airlines,CPH,Kastrup,CAI,Cairo International Airport,2026-07-25T15:45:00+00:00,2026-07-25T21:15:00+00:00,2,C32,,,scheduled
+SK7709,SAS,CPH,Kastrup,CHQ,Souda,2026-07-25T17:25:00+00:00,2026-07-25T21:33:00+00:00,,,,,scheduled
+SK7775,SAS,CPH,Kastrup,CFU,Ioannis Kapodistrias,2026-07-25T17:30:00+00:00,2026-07-25T21:05:00+00:00,,,,,scheduled
+DY3292,Norwegian,CPH,Kastrup,TIA,Rinas Mother Teresa,2026-07-25T18:20:00+00:00,2026-07-25T20:55:00+00:00,2,146-,,12.0,scheduled
+TK8547,Turkish Airlines,CPH,Kastrup,KEF,Keflavik International,2026-07-25T16:55:00+00:00,2026-07-25T18:10:00+00:00,2,A15,,,scheduled
+EK3311,Emirates,CPH,Kastrup,KEF,Keflavik International,2026-07-25T16:55:00+00:00,2026-07-25T18:10:00+00:00,2,A15,,,scheduled
+WX2785,CityJet,CPH,Kastrup,ZAD,Zadar,2026-07-25T17:30:00+00:00,2026-07-25T19:35:00+00:00,3,1-38,,,scheduled
+FH471,Freebird Airlines,CPH,Kastrup,BJV,Milas,2026-07-25T17:05:00+00:00,2026-07-25T21:13:00+00:00,,,,,scheduled
+WY5321,Oman Air,CPH,Kastrup,FRA,Frankfurt International Airport,2026-07-25T14:50:00+00:00,2026-07-25T16:20:00+00:00,2,A9,,16.0,active

@@ -39,5 +39,3 @@ data/processed/
 # ML models
 models/
 
-data/live/*.csv
-data/raw/*.json

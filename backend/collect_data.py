@@ -5,23 +5,29 @@ from backend.config import API_KEY
 import json
 import pandas as pd
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+RAW_FILE = BASE_DIR / "data" / "raw" / "flights_raw.json"
 
 def download_flights():
     url = "https://api.aviationstack.com/v1/flights"
     params = {
-    "access_key": API_KEY,
-    "dep_iata": "CPH"
+        "access_key": API_KEY,
+        "dep_iata": "CPH",
     }
-    response = requests.get(url, params=params)
-    data = response.json()
+    response = requests.get(
+        url,
+        params=params,
+        timeout=10,
+    )
     response.raise_for_status()
-    for flight in data["data"]:
-        if "data" not in data:
-            raise ValueError("No flight data returned from AviationStack API.")
+    data = response.json()
+    if "data" not in data:
+        raise ValueError(
+            "No flight data returned from AviationStack API."
+        )
     return data
 
 def save_raw_json(data):
-    BASE_DIR = Path(__file__).resolve().parent.parent
     raw_dir = BASE_DIR / "data" / "raw"
     raw_dir.mkdir(parents=True, exist_ok=True)
     with open(raw_dir / "flights_raw.json", "w") as file:
@@ -55,29 +61,56 @@ def extract_flights(data):
     return flights
 
 def save_csv(flights):
+    LIVE_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
     df = pd.DataFrame(flights)
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    live_dir = BASE_DIR / "data" / "live"
-    live_dir.mkdir(parents=True, exist_ok=True)
-    df.to_csv(live_dir / "flights.csv", index=False)
+    df.to_csv(
+        LIVE_FILE,
+        index=False,
+    )
+
+def rebuild_csv_from_raw():
+    if not RAW_FILE.exists():
+        raise FileNotFoundError(
+            "flights_raw.json not found."
+        )
+    with open(RAW_FILE, "r") as file:
+        data = json.load(file)
+    flights = extract_flights(data)
+    save_csv(flights)
+    return len(flights)
 
 def refresh_live_data():
-    data = download_flights()
-    save_raw_json(data)
-
-    flights = extract_flights(data)
-    save_csv(flights)
+    try:
+        print("Downloading latest flights...")
+        data = download_flights()
+        save_raw_json(data)
+        flights = extract_flights(data)
+        save_csv(flights)
+        print("Saved latest flights.csv")
+    except requests.RequestException as e:
+        print("Could not refresh live flights:", e)
+        if RAW_FILE.exists():
+            count = rebuild_csv_from_raw()
+            print(f"Using cached data ({count} flights).")
+        else:
+            raise
 
 def main():
-    data = download_flights()
-    save_raw_json(data)
-    flights = extract_flights(data)
-    save_csv(flights)
-    print(f"Downloaded {len(flights)} flights.")
-    print("Saved raw JSON to data/raw/flights_raw.json")
-    print("Saved CSV to data/live/flights.csv")
-    df = pd.read_csv("data/live/flights.csv")
-    print(df.columns)
+    count = rebuild_csv_from_raw()
+    print(f"Rebuilt flights.csv ({count} flights)")
+
+    #data = download_flights()
+    #save_raw_json(data)
+    #flights = extract_flights(data)
+    #save_csv(flights)
+    #print(f"Downloaded {len(flights)} flights.")
+    #print("Saved raw JSON to data/raw/flights_raw.json")
+    #print("Saved CSV to data/live/flights.csv")
+    #df = pd.read_csv("data/live/flights.csv")
+    #print(df.columns)
 
 if __name__ == "__main__":
     main()
