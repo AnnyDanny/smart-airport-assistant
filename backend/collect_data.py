@@ -7,6 +7,7 @@ import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 RAW_FILE = BASE_DIR / "data" / "raw" / "flights_raw.json"
+LIVE_FILE = BASE_DIR / "data" / "live" / "flights.csv"
 
 def download_flights():
     url = "https://api.aviationstack.com/v1/flights"
