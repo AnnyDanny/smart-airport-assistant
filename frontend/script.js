@@ -1,179 +1,140 @@
 const API_URL = "https://smart-airport-api.onrender.com";
-//const API_URL = "http://127.0.0.1:8000";
 
-
-async function loadFlights(){
-    const response =
-        await fetch(
-            `${API_URL}/flights`
-        );
-    const flights =
-        await response.json();
-    const list =
-        document.getElementById("flightList");
-    list.innerHTML = "";
-    flights.forEach(flight => {
-        const item =
-            document.createElement("div");
-        item.className = "flight-item";
-        item.textContent =
-            `${flight.FlightNumber} - ${flight.Airline} → ${flight.Destination}`;
-        item.onclick = function(){
-            document.getElementById("flightInput").value =
-            flight.FlightNumber;
-        };
-        list.appendChild(item);
-    });
-}
-
-function formatDateTime(dateString){
-    const date = new Date(dateString);
-    return date.toLocaleString(
-        "en-GB",
-        {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit"
-        }
-    );
-}
-
-function formatTime(dateString){
-    const date = new Date(dateString);
-    return date.toLocaleTimeString(
-        "en-GB",
-        {
-            hour: "2-digit",
-            minute: "2-digit"
-        }
-    );
-}
-
-function getStatusBadge(status){
-    status = status.toLowerCase();
-    if(status === "active" || status === "scheduled"){
-        return {
-            text: "ON TIME",
-            className: "status-green"
-        };
-    }
-    if(status.includes("delay")){
-        return {
-            text: "DELAYED",
-            className: "status-yellow"
-        };
-    }
-    if(status.includes("cancel")){
-        return {
-            text: "CANCELLED",
-            className: "status-red"
-        };
-    }
-    return {
-        text: status.toUpperCase(),
-        className: "status-gray"
+async function loadFlights() {
+  const response = await fetch(`${API_URL}/flights`);
+  const flights = await response.json();
+  const list = document.getElementById("flightList");
+  list.innerHTML = "";
+  flights.forEach((flight) => {
+    const item = document.createElement("div");
+    item.className = "flight-item";
+    item.textContent = `${flight.FlightNumber} - ${flight.Airline} → ${flight.Destination}`;
+    item.onclick = function () {
+      document.getElementById("flightInput").value = flight.FlightNumber;
     };
+    list.appendChild(item);
+  });
 }
 
-function getDelayExplanation(data){
-    const explanations = [];
-    const probability =
-        data.DelayProbability;
-    if(probability >= 0.7){
-        explanations.push(
-            "High predicted delay risk based on historical flight patterns."
-        );
-    }
-    else if(probability >= 0.3){
-        explanations.push(
-            "Moderate delay risk based on historical flight patterns."
-        );
-    }
-    else{
-        explanations.push(
-            "Low predicted delay risk."
-        );
-    }
-    if(data.Airline){
-        explanations.push(
-            `Airline: ${data.Airline}`
-        );
-    }
-    if(data.Origin && data.Destination){
-        explanations.push(
-            `Route: ${data.Origin} → ${data.Destination}`
-        );
-    }
-    if(data.ScheduledDeparture){
-        const hour =
-            new Date(
-                data.ScheduledDeparture
-            ).getHours();
-        if(hour < 7){
-            explanations.push(
-                "Early morning departure usually has lower congestion."
-            );
-        }
-        else if(hour >= 17){
-            explanations.push(
-                "Evening departure may experience higher airport traffic."
-            );
-        }
-    }
-    return explanations;
+function formatDateTime(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 }
 
-function getCongestionColor(level){
-    if(level === "Low"){
-        return "green";
-    }
-    if(level === "Moderate"){
-        return "orange";
-    }
-    return "red";
+function formatTime(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 }
 
-function getWeatherImpactColor(impact){
-    if(impact === "Low"){
-        return "green";
+function getStatusBadge(status) {
+  status = status.toLowerCase();
+  if (status === "active" || status === "scheduled") {
+    return {
+      text: "ON TIME",
+      className: "status-green",
+    };
+  }
+  if (status.includes("delay")) {
+    return {
+      text: "DELAYED",
+      className: "status-yellow",
+    };
+  }
+  if (status.includes("cancel")) {
+    return {
+      text: "CANCELLED",
+      className: "status-red",
+    };
+  }
+  return {
+    text: status.toUpperCase(),
+    className: "status-gray",
+  };
+}
+
+function getDelayExplanation(data) {
+  const explanations = [];
+  const probability = data.DelayProbability;
+  if (probability >= 0.7) {
+    explanations.push(
+      "High predicted delay risk based on historical flight patterns.",
+    );
+  } else if (probability >= 0.3) {
+    explanations.push(
+      "Moderate delay risk based on historical flight patterns.",
+    );
+  } else {
+    explanations.push("Low predicted delay risk.");
+  }
+  if (data.Airline) {
+    explanations.push(`Airline: ${data.Airline}`);
+  }
+  if (data.Origin && data.Destination) {
+    explanations.push(`Route: ${data.Origin} → ${data.Destination}`);
+  }
+  if (data.ScheduledDeparture) {
+    const hour = new Date(data.ScheduledDeparture).getHours();
+    if (hour < 7) {
+      explanations.push(
+        "Early morning departure usually has lower congestion.",
+      );
+    } else if (hour >= 17) {
+      explanations.push(
+        "Evening departure may experience higher airport traffic.",
+      );
     }
-    if(impact === "Medium"){
-        return "orange";
-    }
-    return "red";
+  }
+  return explanations;
+}
+
+function getCongestionColor(level) {
+  if (level === "Low") {
+    return "green";
+  }
+  if (level === "Moderate") {
+    return "orange";
+  }
+  return "red";
+}
+
+function getWeatherImpactColor(impact) {
+  if (impact === "Low") {
+    return "green";
+  }
+  if (impact === "Medium") {
+    return "orange";
+  }
+  return "red";
 }
 
 async function searchFlight() {
-    const flightNumber =
-    document.getElementById("flightInput").value.trim();
+  const flightNumber = document.getElementById("flightInput").value.trim();
 
-const result =
-    document.getElementById("result");
+  const result = document.getElementById("result");
 
-if (flightNumber === "") {
-
+  if (flightNumber === "") {
     result.innerHTML = `
     <div class="card">
         <h2>⚠️ No flight number entered</h2>
         <p>Please enter a flight number.</p>
     </div>
     `;
-
     return;
-}
+  }
 
-try {
-
-    const response =
-        await fetch(
-            `${API_URL}/predict/${flightNumber}`
-        );
-
+  try {
+    const response = await fetch(`${API_URL}/predict/${flightNumber}`);
     if (!response.ok) {
-
-        result.innerHTML = `
+      result.innerHTML = `
         <div class="card">
             <h2>❌ Flight not found</h2>
             <p>
@@ -186,35 +147,28 @@ try {
             </p>
         </div>
         `;
-
-        return;
+      return;
     }
 
-    const data =
-        await response.json();
-    console.log(data);
-
+    const data = await response.json();
     const status = getStatusBadge(data.FlightStatus);
     const delayExplanation = getDelayExplanation(data);
     const probability = data.DelayProbability;
-
     let riskText;
     let riskColor;
 
     if (probability < 0.3) {
-        riskText = "Low";
-        riskColor = "green";
-    }
-    else if (probability < 0.7) {
-        riskText = "Medium";
-        riskColor = "orange";
-    }
-    else {
-        riskText = "High";
-        riskColor = "red";
+      riskText = "Low";
+      riskColor = "green";
+    } else if (probability < 0.7) {
+      riskText = "Medium";
+      riskColor = "orange";
+    } else {
+      riskText = "High";
+      riskColor = "red";
     }
 
-        result.innerHTML = `
+    result.innerHTML = `
 <div class="card">
     <h2>${data.FlightNumber}</h2>
     <p>
@@ -271,7 +225,7 @@ try {
         🔴 <strong>Delay risk:</strong>
         <span style="color:${riskColor}">
             ${riskText}
-            (${Math.round(probability*100)}%)
+            (${Math.round(probability * 100)}%)
         </span>
     </p>
 <div class="delay-explanation">
@@ -279,13 +233,7 @@ try {
         Why?
     </strong>
     <ul>
-        ${
-            delayExplanation
-            .map(item =>
-                `<li>${item}</li>`
-            )
-            .join("")
-        }
+        ${delayExplanation.map((item) => `<li>${item}</li>`).join("")}
     </ul>
 </div>
 <div class="congestion-card">
@@ -345,12 +293,9 @@ try {
     </p>
 </div>
 `;
-    }
-    catch (error) {
-
-        console.error(error);
-
-        result.innerHTML = `
+  } catch (error) {
+    console.error(error);
+    result.innerHTML = `
         <div class="card">
             <h2>⚠️ Connection error</h2>
             <p>
@@ -361,9 +306,9 @@ try {
            </p>
         </div>
      `;
-    }
+  }
 }
 
-window.onload = function(){
-    loadFlights();
+window.onload = function () {
+  loadFlights();
 };

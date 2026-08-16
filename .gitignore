@@ -15,19 +15,15 @@ env/
 # Mac
 .DS_Store
 
-
 # Node
 node_modules/
-
 
 # IDE
 .vscode/
 .idea/
 
-
 # Environment variables
 .env
-
 
 # Logs
 *.log
@@ -39,3 +35,5 @@ data/processed/
 # ML models
 models/
 
+# Ruff cache
+.ruff_cache/

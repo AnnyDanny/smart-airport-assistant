@@ -1,14 +1,15 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+
 from backend.recommendation_engine import (
-    load_model,
-    load_live_data,
-    find_flight,
-    calculate_congestion,
-    prepare_features,
-    predict_delay,
-    calculate_arrival_time,
     build_recommendation,
+    calculate_arrival_time,
+    calculate_congestion,
+    find_flight,
+    load_live_data,
+    load_model,
+    predict_delay,
+    prepare_features,
 )
 from backend.weather_service import get_weather
 
@@ -19,8 +20,6 @@ from backend.weather_service import get_weather
     destination_encoder,
     aircraft_encoder,
 ) = load_model()
-
-print("Loaded api from:", __file__)
 
 app = FastAPI(
     title="Smart Airport Assistant API",
@@ -36,11 +35,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/")
 def home():
-    return {
-        "message": "Smart Airport Assistant API is running."
-    }
+    return {"message": "Smart Airport Assistant API is running."}
+
 
 @app.get("/flights")
 def get_flights():
@@ -53,28 +52,21 @@ def get_flights():
             "FlightStatus",
         ]
     ]
-    return flights.to_dict(
-        orient="records"
-    )
+    return flights.to_dict(orient="records")
+
 
 @app.get("/predict/{flight_number}")
 def get_prediction(flight_number: str):
     df = load_live_data()
     try:
-        flight = find_flight(
-            df,
-            flight_number
-        )
+        flight = find_flight(df, flight_number)
         weather = get_weather()
         congestion = calculate_congestion(
             df,
             flight,
         )
     except ValueError:
-        raise HTTPException(
-            status_code=404,
-            detail="Flight not found."
-        )
+        raise HTTPException(status_code=404, detail="Flight not found.")
     features = prepare_features(
         flight,
         airline_encoder,
@@ -92,9 +84,7 @@ def get_prediction(flight_number: str):
     print("Probability:", probability)
     print(type(probability))
 
-    recommendation = calculate_arrival_time(
-        flight
-    )
+    recommendation = calculate_arrival_time(flight)
 
     result = build_recommendation(
         flight,

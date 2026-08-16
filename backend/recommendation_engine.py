@@ -1,43 +1,38 @@
-from huggingface_hub import hf_hub_download
+from datetime import timedelta
+from pathlib import Path
+
 import joblib
 import pandas as pd
-from pathlib import Path
-from datetime import timedelta
+from huggingface_hub import hf_hub_download
+
 from backend.live_preprocessing import preprocess_live_flights
+
 
 def safe_encode(value, encoder):
     if value in encoder.classes_:
         return encoder.transform([value])[0]
     return 0
 
-def load_model():
 
+def load_model():
     repo_id = "HannaDanylova/smart-airport-model"
-    model_path = hf_hub_download(
-        repo_id=repo_id,
-        filename="model.pkl"
-    )
+    model_path = hf_hub_download(repo_id=repo_id, filename="model.pkl")
 
     airline_encoder_path = hf_hub_download(
-        repo_id=repo_id,
-        filename="airline_encoder.pkl"
+        repo_id=repo_id, filename="airline_encoder.pkl"
     )
 
     origin_encoder_path = hf_hub_download(
-        repo_id=repo_id,
-        filename="origin_encoder.pkl"
+        repo_id=repo_id, filename="origin_encoder.pkl"
     )
 
     destination_encoder_path = hf_hub_download(
-        repo_id=repo_id,
-        filename="destination_encoder.pkl"
+        repo_id=repo_id, filename="destination_encoder.pkl"
     )
 
     aircraft_encoder_path = hf_hub_download(
-        repo_id=repo_id,
-        filename="aircraft_encoder.pkl"
+        repo_id=repo_id, filename="aircraft_encoder.pkl"
     )
-
 
     model = joblib.load(model_path)
 
@@ -45,21 +40,13 @@ def load_model():
     print("Model size:", Path(model_path).stat().st_size)
     print("Model type:", type(model))
 
-    airline_encoder = joblib.load(
-        airline_encoder_path
-    )
+    airline_encoder = joblib.load(airline_encoder_path)
 
-    origin_encoder = joblib.load(
-        origin_encoder_path
-    )
+    origin_encoder = joblib.load(origin_encoder_path)
 
-    destination_encoder = joblib.load(
-        destination_encoder_path
-    )
+    destination_encoder = joblib.load(destination_encoder_path)
 
-    aircraft_encoder = joblib.load(
-        aircraft_encoder_path
-    )
+    aircraft_encoder = joblib.load(aircraft_encoder_path)
     return (
         model,
         airline_encoder,
@@ -68,51 +55,19 @@ def load_model():
         aircraft_encoder,
     )
 
-'''def load_model():
-
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    models_dir = BASE_DIR / "models"
-
-    model = joblib.load(
-        models_dir / "model_n_estimators10.pkl"
-    )
-
-    airline_encoder = joblib.load(
-        models_dir / "airline_encoder.pkl"
-    )
-
-    origin_encoder = joblib.load(
-        models_dir / "origin_encoder.pkl"
-    )
-
-    destination_encoder = joblib.load(
-        models_dir / "destination_encoder.pkl"
-    )
-
-    aircraft_encoder = joblib.load(
-        models_dir / "aircraft_encoder.pkl"
-    )
-
-    return (
-        model,
-        airline_encoder,
-        origin_encoder,
-        destination_encoder,
-        aircraft_encoder,
-    )'''
 
 def load_live_data():
     df = preprocess_live_flights()
     return df
 
+
 def find_flight(df, flight_number):
-    flight = df[
-        df["FlightNumber"].str.upper() == flight_number.upper()
-    ]
+    flight = df[df["FlightNumber"].str.upper() == flight_number.upper()]
     if flight.empty:
         raise ValueError("Flight not found.")
 
     return flight.iloc[0]
+
 
 def prepare_features(
     flight,
@@ -120,30 +75,19 @@ def prepare_features(
     origin_encoder,
     destination_encoder,
     aircraft_encoder,
-    ):
+):
     features = {
-        "Airline": safe_encode(
-            flight["Airline"],
-            airline_encoder
-        ),
-        "Origin": safe_encode(
-            flight["Origin"],
-            origin_encoder
-        ),
-        "Destination": safe_encode(
-            flight["Destination"],
-            destination_encoder
-        ),
+        "Airline": safe_encode(flight["Airline"], airline_encoder),
+        "Origin": safe_encode(flight["Origin"], origin_encoder),
+        "Destination": safe_encode(flight["Destination"], destination_encoder),
         "DepartureHour": flight["DepartureHour"],
         "Month": flight["Month"],
         "DayOfWeek": flight["DayOfWeek"],
         "Distance": 1000,
-        "AircraftType": safe_encode(
-            "Unknown",
-            aircraft_encoder
-        ),
+        "AircraftType": safe_encode("Unknown", aircraft_encoder),
     }
     return pd.DataFrame([features])
+
 
 def predict_delay(model, features):
     probabilities = model.predict_proba(features)
@@ -152,53 +96,37 @@ def predict_delay(model, features):
     print("probability =", probability)
     return probability
 
+
 def calculate_arrival_time(flight):
     departure = flight["ScheduledDeparture"]
     recommendation = departure - timedelta(hours=2)
     return recommendation
 
+
 def calculate_congestion(df, flight):
     departure_hour = flight["DepartureHour"]
     nearby_flights = df[
-        df["DepartureHour"].between(
-            departure_hour - 1,
-            departure_hour + 1
-        )
+        df["DepartureHour"].between(departure_hour - 1, departure_hour + 1)
     ]
     flights_count = len(nearby_flights)
     if flights_count < 10:
-        return {
-            "level": "Low",
-            "percentage": 30
-        }
+        return {"level": "Low", "percentage": 30}
     elif flights_count < 25:
-        return {
-            "level": "Moderate",
-            "percentage": 60
-        }
+        return {"level": "Moderate", "percentage": 60}
     else:
-        return {
-            "level": "High",
-            "percentage": 85
-        }
+        return {"level": "High", "percentage": 85}
 
-def build_recommendation(
-    flight,
-    probability,
-    recommendation_time
-    ):
+
+def build_recommendation(flight, probability, recommendation_time):
     return {
         "FlightNumber": flight["FlightNumber"],
         "Airline": flight["Airline"],
-
         "Origin": flight["Origin"],
         "OriginAirport": flight["OriginAirport"],
         "ScheduledDeparture": str(flight["ScheduledDeparture"]),
-
         "Destination": flight["Destination"],
         "DestinationAirport": flight["DestinationAirport"],
         "ScheduledArrival": str(flight["ScheduledArrival"]),
-
         "Terminal": flight["Terminal"],
         "Gate": flight["Gate"],
         "FlightStatus": flight["FlightStatus"],
@@ -234,9 +162,7 @@ def main():
                 ]
             ].head(20)
         )
-        flight_number = input(
-            "\nEnter flight number: "
-        ).strip()
+        flight_number = input("\nEnter flight number: ").strip()
         try:
             flight = find_flight(df, flight_number)
             features = prepare_features(
@@ -250,9 +176,7 @@ def main():
                 model,
                 features,
             )
-            recommendation_time = calculate_arrival_time(
-                flight
-            )
+            recommendation_time = calculate_arrival_time(flight)
             recommendation = build_recommendation(
                 flight,
                 probability,
@@ -262,12 +186,11 @@ def main():
             print(recommendation)
         except ValueError as error:
             print(f"\n{error}")
-        answer = input(
-            "\nSearch another flight? (y/n): "
-        ).strip().lower()
+        answer = input("\nSearch another flight? (y/n): ").strip().lower()
         if answer != "y":
             print("\nGoodbye!")
             break
+
 
 if __name__ == "__main__":
     main()
