@@ -1,4 +1,8 @@
-const API_URL = "https://smart-airport-api.onrender.com";
+const API_URL =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+    ? "http://localhost:8000"
+    : "https://smart-airport-api.onrender.com";
 
 async function loadFlights() {
   const response = await fetch(`${API_URL}/flights`);
