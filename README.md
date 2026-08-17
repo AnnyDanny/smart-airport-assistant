@@ -5,6 +5,17 @@ An intelligent, data-driven decision-support application that combines live flig
 
 ---
 
+The main goal of the Smart Airport Assistant is to improve the travel experience for airline passengers by helping them deal with flight delays and airport crowding using data. Usually, airlines inform travelers about delays after they are already at the airport, which causes long waiting times and stress. This project helps solve that problem by giving passengers clear, personalized advice on when to leave for the airport before they set off.
+
+To achieve this, the project combines machine learning with real-time data. The application uses a trained Random Forest model together with live information from the AviationStack and Open-Meteo APIs. This allows the system to analyze past flight delays, current flight schedules, and weather conditions at Copenhagen Airport. Rather than showing complicated data or statistics, the system turns delay risks and weather warnings into simple, practical advice - such as telling the user to arrive earlier when the delay risk is high.
+
+In addition to the technical setup, the project relies heavily on user experience research and reflective analysis. Based on a Design Thinking approach, user interviews at Copenhagen Airport showed that passengers do not just want raw data; they need clear, reassuring guidance that is easy to understand. Furthermore, the analysis of the project proved that machine learning and live data must work together. Machine learning identifies long-term delay patterns, while live APIs capture sudden weather changes. By combining these two sources into a simple web application, the project shows how machine learning and good design can help solve everyday travel problems.
+
+---
+<img width="2000" height="2000" alt="Green Simple Company Negative Aircraft Space Logo" src="https://github.com/user-attachments/assets/b6edf34a-68f2-4577-844d-7cb515fb8d45" />
+
+---
+
 ## Data
 
 The project leverages both static historical data for model training and live APIs for real-time inference:
@@ -45,7 +56,6 @@ Ensure you have the following installed on your machine:
 * **API Keys Required:**
   * [AviationStack API Key](https://aviationstack.com/) (Live flight data)
 ---
-
 ## Step-by-Step Installation
 ### Step 1: Clone the Repository
 ### Step 2: Set Up Virtual Environment
@@ -58,7 +68,24 @@ python -m venv venv
 ### Step 3: Install Dependencies:
 pip install --upgrade pip
 pip install -r requirements.txt
+### Step 4: Configure Environment Variables
+Create a `.env` file in the `backend/` directory by copying the `.env.example` file:
+```cp .env.example backend/.env```
+Open the new .env file in your editor and insert your personal AviationStack API key:
+```AVIATIONSTACK_API_KEY=your_actual_api_key_here```
+### Step 5: Start the Backend Server
+Navigate to the backend/ directory and launch the FastAPI server using Uvicorn:
+```cd backend```
+```uvicorn api:app --reload --port 8000```
+Local API Base URL: ```http://127.0.0.1:8000/```
+API Documentation: ```http://127.0.0.1:8000/docs```
+### Step 6: Launch the Web Frontend
+Open a new terminal windows and navigate to the directory /frontend:
+```cd frontend```
+```python3 -m http.server 3000```, then
+open http://localhost:3000 in your web browser
 
+---
 
 ### Repository Structure
 
@@ -66,6 +93,7 @@ pip install -r requirements.txt
 ├── backend/                             # Core Python backend application and API logic
 │   ├── api.py                           # FastAPI application entry point and REST endpoint definitions
 │   ├── collect_data.py                  # Fetches live flight statuses from the AviationStack API with local caching
+│   ├── config.py                        # Loads environment variables and secures the AviationStack API key
 │   ├── live_preprocessing.py            # Formats real-time payloads, encodes categories, and prepares matrices for inference
 │   ├── recommendation_engine.py         # Loads the remote ML model and calculates final passenger arrival recommendations
 │   └── weather_service.py               # Connects to the Open-Meteo API to retrieve real-time weather conditions for CPH
@@ -89,11 +117,12 @@ pip install -r requirements.txt
 ├── requirements.txt                     # List of Python dependencies required for the backend
 ```
 
+---
 ### Using the Web Interface
 
 1. **Enter Flight Details:**
    * Open the application in any web browser: https://smart-airport-assistant.vercel.app/
-   * Enter your flight number (e.g., `SK1420`) and select your travel date.
+   * Enter your flight number (e.g., `AM7815`)
    * Click **"Search" button**.
 
 2. **View Live Results and Decision Support:**
