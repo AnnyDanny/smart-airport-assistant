@@ -1,1 +1,6 @@
-API_KEY = "7c06998a1e3a0436ce21321c423dbf4b"
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+API_KEY = os.getenv("AVIATIONSTACK_API_KEY")
