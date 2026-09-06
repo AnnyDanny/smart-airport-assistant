@@ -16,77 +16,6 @@ In addition to the technical setup, the project relies heavily on user experienc
 
 ---
 
-## Data
-
-The project leverages both static historical data for model training and live APIs for real-time inference:
-
-* **Historical Flight Records:** Kaggle-sourced historical flight dataset utilized for data cleaning, feature engineering, and model training (identifying delay trends across airlines, flight numbers, and schedules).
-* **Live Flight Statuses:** Integrated via the **AviationStack REST API** to retrieve live gate, terminal, and departure information.
-* **Environmental Data:** Integrated via the **Open-Meteo REST API** to capture real-time weather conditions impacting flight schedules.
-* **API Resiliency:** Built-in local JSON caching mechanisms handle third-party API rate limits and fallbacks to ensure zero downtime.
-
----
-
-## Machine Learning
-
-The predictive pipeline evaluates historical patterns to calculate delay probabilities:
-
-* **Model Architecture:** Trained using a **Random Forest Classifier** (`scikit-learn`) optimized for tabular classification.
-* **Preprocessing Pipeline:** Modularized pipeline (`live_preprocessing.py`, `preprocessing.py`) handling missing values, feature creation, and categorical encoding via `LabelEncoder`.
-* **Model Operations (MLOps):** Artifacts serialized using `joblib` and hosted remotely on **Hugging Face Hub** to optimize repository size and enable lightweight backend loading on server startup.
-* **Evaluation Metrics:** Evaluated using `accuracy_score`, `confusion_matrix`, and `classification_report`.
-
----
-
-## Application and Architecture
-
-* **Backend Engine:** Built using **FastAPI** to deliver RESTful endpoints, async data fetching, and automated Swagger/OpenAPI documentation.
-* **Automated Testing:** Extensive test suites implemented with **Pytest** covering data processing routines, inference logic, caching fallbacks, and REST endpoints.
-* **Cloud Hosting:** API backend deployed on **Render**; static web frontend hosted on **Vercel**.
-
----
-
-## Project Setup and Local Development Guide
-
-### Prerequisites
-
-Ensure you have the following installed on your machine:
-* **Python:** `3.10` or higher
-* **Git:** For cloning the repository
-* **API Keys Required:**
-  * [AviationStack API Key](https://aviationstack.com/) (Live flight data)
----
-## Step-by-Step Installation
-### Step 1: Clone the Repository
-### Step 2: Set Up Virtual Environment
-##### On macOS / Linux:
-python3 -m venv venv
-source venv/bin/activate
-##### On Windows (PowerShell):
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-### Step 3: Install Dependencies:
-pip install --upgrade pip
-pip install -r requirements.txt
-### Step 4: Configure Environment Variables
-Create a `.env` file in the `backend/` directory by copying the `.env.example` file:
-```cp .env.example backend/.env```
-Open the new .env file in your editor and insert your personal AviationStack API key:
-```AVIATIONSTACK_API_KEY=your_actual_api_key_here```
-### Step 5: Start the Backend Server
-Navigate to the backend/ directory and launch the FastAPI server using Uvicorn:
-```cd backend```
-```uvicorn api:app --reload --port 8000```
-Local API Base URL: ```http://127.0.0.1:8000/```
-API Documentation: ```http://127.0.0.1:8000/docs```
-### Step 6: Launch the Web Frontend
-Open a new terminal windows and navigate to the directory /frontend:
-```cd frontend```
-```python3 -m http.server 3000```, then
-open http://localhost:3000 in your web browser
-
----
-
 ### Repository Structure
 
 ```
@@ -100,6 +29,10 @@ open http://localhost:3000 in your web browser
 ├── data/                                # Data storage directory for historical records and API caches
 │   ├── live/                            # Local JSON cache files for live flight and weather responses to prevent API rate limiting
 │   └── raw/                             # Original Kaggle historical flight dataset used for model training
+├── docs/                                # Docummentation
+│   ├── architecture.md                  # Architecture docummentation
+│   └── data_and_ml.md                   # Data and ML docummentation
+│   └── project_setup.md                 # Project Setup docummentation
 ├── frontend/                            # Client-side user interface files
 │   ├── index.html                       # HTML structure for the passenger search dashboard and recommendation display
 │   ├── script.js                        # Client-side JavaScript handling form input, backend API calls, and UI rendering
@@ -118,6 +51,19 @@ open http://localhost:3000 in your web browser
 ```
 
 ---
+
+Application and Architecture available [here:](docs/architecture.md)
+
+---
+
+Data and ML description available [here:](docs/data_and_ml.md)
+
+---
+
+Project Setup and Local Development Guide available [here:](docs/project_setup.md)
+
+---
+
 ### Using the Web Interface
 
 1. **Enter Flight Details:**
