@@ -29,12 +29,25 @@ def create_time_features(df):
 
 
 def fill_missing_values(df):
+    df["FlightNumber"] = df["FlightNumber"].fillna("Unknown")
+    df["Airline"] = df["Airline"].fillna("Unknown")
+    df["Origin"] = df["Origin"].fillna("Unknown")
+    df["OriginAirport"] = df["OriginAirport"].fillna("Unknown")
+    df["Destination"] = df["Destination"].fillna("Unknown")
+    df["DestinationAirport"] = df["DestinationAirport"].fillna("Unknown")
+
     df["Terminal"] = (
-        df["Terminal"].fillna("Unknown").astype(str).str.replace(".0", "", regex=False)
+        df["Terminal"]
+        .fillna("Unknown")
+        .astype(str)
+        .str.replace(".0", "", regex=False)
     )
+
     df["Gate"] = df["Gate"].fillna("Unknown")
     df["DepartureDelay"] = df["DepartureDelay"].fillna(0)
     df["ArrivalDelay"] = df["ArrivalDelay"].fillna(0)
+    df["FlightStatus"] = df["FlightStatus"].fillna("Unknown")
+
     return df
 
 

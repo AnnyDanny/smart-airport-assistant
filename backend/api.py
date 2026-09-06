@@ -52,6 +52,7 @@ def get_flights():
             "FlightStatus",
         ]
     ]
+    flights = flights.where(pd.notna(flights), None)
     return flights.to_dict(orient="records")
 
 
