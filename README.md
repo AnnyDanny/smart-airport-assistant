@@ -67,7 +67,7 @@ Project Setup and Local Development Guide available [here:](docs/project_setup.m
 ### Using the Web Interface
 
 1. **Enter Flight Details:**
-   * Open the application in any web browser: https://smart-airport-assistant.vercel.app/
+   * Open the application.
    * Enter your flight number (e.g., `AM7815`)
    * Click **"Search" button**.
 
