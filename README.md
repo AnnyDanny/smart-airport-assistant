@@ -42,6 +42,8 @@ In addition to the technical setup, the project relies heavily on user experienc
 │   ├── 02_preprocessing.ipynb           # Notebook for testing feature engineering and missing value strategies
 │   ├── 03_model_training.ipynb          # Notebook for training, evaluating, and serializing the Random Forest classifier
 │   └── preprocessing.py                 # Pipeline functions for feature creation, selection, and encoding
+├── tests/                               # Automated testing was implemented using Pytest
+│   ├── test_recommendation_engine.py    # The tests use mock objects for the encoders and machine-learning model
 ├── .gitignore                           # Specifies untracked files and folders to ignore
 ├── LICENSE                              # Open-source license terms for the project repository
 ├── README.md                            # Comprehensive project documentation, setup guides, and system architecture
